@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import {
   FaInstagram,
-  FaWhatsapp,
   FaArrowUp,
   FaArrowRight,
 } from "react-icons/fa";
@@ -14,34 +13,79 @@ function Contact() {
     email: "",
     project: "Arquitectura",
     message: "",
+    website: "",
   });
 
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState("");
+
+  // Actualizar campos
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (status) {
+      setStatus("");
+    }
   };
 
-  const handleSubmit = (e) => {
+  // Enviar consulta
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const subject = encodeURIComponent(
-      `Consulta desde la web - ${form.project}`
-    );
+    if (submitting) return;
 
-    const body = encodeURIComponent(
-      `Nombre: ${form.name}\nEmail: ${form.email}\nProyecto: ${form.project}\n\nMensaje:\n${form.message}`
-    );
+    setSubmitting(true);
+    setStatus("");
 
-    // Reemplazar por el correo real del estudio.
-    window.location.href = `mailto:correo@tudominio.com?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "No pudimos enviar tu consulta."
+        );
+      }
+
+      setStatus("success");
+
+      setForm({
+        name: "",
+        email: "",
+        project: "Arquitectura",
+        message: "",
+        website: "",
+      });
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      setStatus("error");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <section className="contact" id="contacto">
+
+      {/* ENCABEZADO */}
       <div className="contact__top">
         <span>LUCERO ESTUDIO DE ARQUITECTURA</span>
         <span>06 / 06 — CONTACTO</span>
       </div>
 
+      {/* HERO */}
       <div className="contact__hero">
         <span className="contact__eyebrow">
           TODO COMIENZA CON UNA IDEA
@@ -58,11 +102,15 @@ function Contact() {
             Cada espacio tiene una historia por contar.
             Nos gustaría conocer la tuya.
           </p>
+
           <span className="contact__star">✳</span>
         </div>
       </div>
 
+      {/* CONTENIDO PRINCIPAL */}
       <div className="contact__main">
+
+        {/* INFORMACIÓN */}
         <div className="contact__info">
           <span className="contact__section-label">
             CONECTEMOS
@@ -80,31 +128,37 @@ function Contact() {
           </p>
 
           <div className="contact__links">
+
             <a
               href="https://www.instagram.com/lucero.estudiodearquitectura/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <FaInstagram />
+
               <span>
                 <small>SEGUINOS EN INSTAGRAM</small>
                 @lucero.estudiodearquitectura
               </span>
+
               <FaArrowRight className="contact__link-arrow" />
             </a>
 
             <a
               href="https://www.instagram.com/lucer.oatelier/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <FaInstagram />
+
               <span>
                 <small>DESCUBRÍ NUESTRO ATELIER</small>
                 @lucer.oatelier
               </span>
+
               <FaArrowRight className="contact__link-arrow" />
             </a>
+
           </div>
 
           <div className="contact__location">
@@ -113,15 +167,39 @@ function Contact() {
           </div>
         </div>
 
+        {/* FORMULARIO */}
         <div className="contact__form-container">
+
           <div className="contact__form-heading">
             <span>01 — INICIEMOS UNA CONVERSACIÓN</span>
-            <p>Completá tus datos y contanos sobre tu proyecto.</p>
+            <p>
+              Completá tus datos y contanos sobre tu proyecto.
+            </p>
           </div>
 
-          <form className="contact__form" onSubmit={handleSubmit}>
+          <form
+            className="contact__form"
+            onSubmit={handleSubmit}
+          >
+
+            {/* CAMPO ANTI-SPAM */}
+            <input
+              type="text"
+              name="website"
+              value={form.website}
+              onChange={handleChange}
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+              className="contact__honeypot"
+            />
+
+            {/* NOMBRE */}
             <div className="contact__field">
-              <label htmlFor="contact-name">TU NOMBRE</label>
+              <label htmlFor="contact-name">
+                TU NOMBRE
+              </label>
+
               <input
                 id="contact-name"
                 type="text"
@@ -129,12 +207,18 @@ function Contact() {
                 placeholder="¿Cómo te llamás?"
                 value={form.name}
                 onChange={handleChange}
+                maxLength={100}
+                autoComplete="name"
                 required
               />
             </div>
 
+            {/* EMAIL */}
             <div className="contact__field">
-              <label htmlFor="contact-email">TU EMAIL</label>
+              <label htmlFor="contact-email">
+                TU EMAIL
+              </label>
+
               <input
                 id="contact-email"
                 type="email"
@@ -142,17 +226,24 @@ function Contact() {
                 placeholder="tu@email.com"
                 value={form.email}
                 onChange={handleChange}
+                maxLength={254}
+                autoComplete="email"
                 required
               />
             </div>
 
+            {/* TIPO DE PROYECTO */}
             <div className="contact__field">
-              <label htmlFor="contact-project">TIPO DE PROYECTO</label>
+              <label htmlFor="contact-project">
+                TIPO DE PROYECTO
+              </label>
+
               <select
                 id="contact-project"
                 name="project"
                 value={form.project}
                 onChange={handleChange}
+                required
               >
                 <option>Arquitectura</option>
                 <option>Interiorismo</option>
@@ -164,8 +255,12 @@ function Contact() {
               </select>
             </div>
 
+            {/* MENSAJE */}
             <div className="contact__field">
-              <label htmlFor="contact-message">TU MENSAJE</label>
+              <label htmlFor="contact-message">
+                TU MENSAJE
+              </label>
+
               <textarea
                 id="contact-message"
                 name="message"
@@ -173,27 +268,74 @@ function Contact() {
                 rows="4"
                 value={form.message}
                 onChange={handleChange}
+                maxLength={3000}
                 required
               />
             </div>
 
-            <button className="contact__submit" type="submit">
-              ENVIAR CONSULTA
-              <FaArrowRight />
+            {/* BOTÓN */}
+            <button
+              className="contact__submit"
+              type="submit"
+              disabled={submitting}
+            >
+              {submitting
+                ? "ENVIANDO..."
+                : "ENVIAR CONSULTA"}
+
+              {!submitting && <FaArrowRight />}
             </button>
+
           </form>
+
+          {/* ESTADOS DEL FORMULARIO */}
+          {status === "success" && (
+            <div
+              className="contact__success"
+              role="status"
+              aria-live="polite"
+            >
+              <span>✓</span>
+              <p>
+                ¡Gracias por escribirnos!
+                Recibimos tu consulta y pronto nos pondremos
+                en contacto.
+              </p>
+            </div>
+          )}
+
+          {status === "error" && (
+            <div
+              className="contact__error"
+              role="alert"
+            >
+              <p>
+                No pudimos enviar tu consulta.
+                Por favor, intentá nuevamente.
+              </p>
+            </div>
+          )}
+
         </div>
       </div>
 
+      {/* FOOTER */}
       <footer className="contact__footer">
+
         <div className="contact__brand">
-          <h3>LUCERO<span>.</span></h3>
+          <h3>
+            LUCERO<span>.</span>
+          </h3>
+
           <p>ESTUDIO DE ARQUITECTURA</p>
         </div>
 
         <div className="contact__footer-center">
           ARQUITECTURA · PAISAJISMO · ILUMINACIÓN · ARTE · DISEÑO
-          <span>20 AÑOS CREANDO ESPACIOS Y TRANSFORMANDO IDEAS.</span>
+
+          <span>
+            20 AÑOS CREANDO ESPACIOS Y TRANSFORMANDO IDEAS.
+          </span>
         </div>
 
         <a
@@ -203,9 +345,12 @@ function Contact() {
         >
           <FaArrowUp />
         </a>
+
       </footer>
+
     </section>
   );
 }
 
 export default Contact;
+

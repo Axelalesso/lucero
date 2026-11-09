@@ -315,6 +315,59 @@
   border-color: #c18b6e;
 }
 
+
+/* Protección antispam */
+.contact__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mensaje de éxito */
+.contact__success {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid rgba(120, 129, 108, 0.4);
+  color: #aab69a;
+  line-height: 1.6;
+}
+
+.contact__success span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.contact__success p {
+  margin: 0;
+}
+
+/* Mensaje de error */
+.contact__error {
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid rgba(197, 111, 75, 0.5);
+  color: #d99577;
+  line-height: 1.6;
+}
+
+.contact__error p {
+  margin: 0;
+}
+
+/* Estado de envío */
+.contact__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
 /* TABLET */
 
 @media (max-width: 900px) {
