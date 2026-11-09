@@ -1,0 +1,484 @@
+.about {
+  background: #f7f5f0;
+  color: #292925;
+  padding: 130px 7% 110px;
+  overflow: hidden;
+}
+
+.about__container {
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+/* ENCABEZADO */
+
+.about__header {
+  max-width: 850px;
+  margin-bottom: 90px;
+}
+
+.about__eyebrow {
+  display: block;
+  color: #a66f55;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+.about__heading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 400;
+  line-height: 0.98;
+  margin: 0;
+  letter-spacing: -1.5px;
+}
+
+.about__heading em,
+.about__areas h3 em,
+.about__elena h3 em {
+  color: #a66f55;
+  font-weight: 400;
+}
+
+.about__intro {
+  color: #77736c;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 420px;
+  margin-top: 30px;
+}
+
+/* EXPLORADOR INTERACTIVO */
+
+.about__explorer {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.about__visual {
+  height: 620px;
+  position: relative;
+  overflow: hidden;
+  background: #e8e1d7;
+}
+
+.about__main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: aboutImageEnter 0.65s ease;
+  transition: transform 0.8s ease;
+}
+
+.about__visual:hover .about__main-image {
+  transform: scale(1.035);
+}
+
+@keyframes aboutImageEnter {
+  from {
+    opacity: 0.4;
+    transform: scale(1.025);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.about__image-caption {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  right: 25px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.about__image-label {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: white;
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+/* Degradado para mejorar la lectura de los textos */
+
+.about__visual::after {
+  content: "";
+  position: absolute;
+  inset: 50% 0 0;
+  background: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.45)
+  );
+  pointer-events: none;
+}
+
+/* ÁREAS */
+
+.about__areas h3,
+.about__elena h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(38px, 4vw, 54px);
+  font-weight: 400;
+  line-height: 1;
+  margin: 0 0 22px;
+}
+
+.about__areas-intro {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  color: #77736c;
+  line-height: 1.8;
+  max-width: 370px;
+  margin-bottom: 35px;
+}
+
+/* PESTAÑAS */
+
+.about__tabs {
+  border-top: 1px solid #dcd6cd;
+}
+
+.about__tab {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px 1fr 25px;
+  align-items: center;
+  gap: 15px;
+  padding: 22px 5px;
+  border: none;
+  border-bottom: 1px solid #dcd6cd;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: padding 0.3s ease, color 0.3s ease;
+  color: #77736c;
+}
+
+.about__tab:hover,
+.about__tab.active {
+  color: #a66f55;
+  padding-left: 13px;
+}
+
+.about__tab-number {
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.about__tab-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+}
+
+.about__tab-arrow {
+  font-size: 18px;
+  opacity: 0;
+  transform: translate(-5px, 5px);
+  transition: all 0.3s ease;
+}
+
+.about__tab:hover .about__tab-arrow,
+.about__tab.active .about__tab-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* DESCRIPCIÓN DINÁMICA */
+
+.about__description {
+  min-height: 100px;
+  padding-top: 25px;
+  animation: aboutTextEnter 0.4s ease;
+}
+
+.about__description p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #77736c;
+  max-width: 410px;
+}
+
+@keyframes aboutTextEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* EXPERIENCIA */
+
+.about__experience {
+  display: grid;
+  grid-template-columns: 0.6fr 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  padding: 90px 0;
+  margin-top: 110px;
+  border-top: 1px solid #dcd6cd;
+  border-bottom: 1px solid #dcd6cd;
+}
+
+.about__experience-number {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(85px, 10vw, 130px);
+  line-height: 0.8;
+  color: #a66f55;
+}
+
+.about__experience-number span {
+  font-size: 55px;
+}
+
+.about__experience-text h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.about__experience > p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #77736c;
+  max-width: 300px;
+}
+
+/* ELENA */
+
+.about__elena {
+  display: grid;
+  grid-template-columns: 1fr 0.7fr;
+  gap: 100px;
+  align-items: center;
+  padding-top: 110px;
+}
+
+.about__elena-content {
+  max-width: 620px;
+}
+
+.about__elena-content > p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #77736c;
+  max-width: 480px;
+  margin: 25px 0;
+}
+
+.about__elena-button {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 15px 0;
+  border: none;
+  border-bottom: 1px solid #a66f55;
+  background: transparent;
+  color: #292925;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.about__elena-button:hover {
+  color: #a66f55;
+}
+
+.about__elena-button span {
+  font-size: 20px;
+}
+
+/* DESPLEGABLE */
+
+.about__elena-details {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.6s ease,
+    opacity 0.4s ease,
+    margin 0.4s ease;
+}
+
+.about__elena-details.visible {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 25px;
+}
+
+.about__elena-details p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #77736c;
+  margin-bottom: 15px;
+}
+
+/* ELEMENTO GRÁFICO */
+
+.about__elena-decoration {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #e8e1d7;
+  position: relative;
+  overflow: hidden;
+}
+
+.about__elena-decoration span {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 220px;
+  line-height: 1;
+  font-style: italic;
+  color: #a66f55;
+  transition: transform 0.7s ease;
+}
+
+.about__elena-decoration:hover span {
+  transform: scale(1.08) rotate(-5deg);
+}
+
+.about__elena-decoration p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #77736c;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .about__explorer {
+    gap: 45px;
+  }
+
+  .about__visual {
+    height: 530px;
+  }
+
+  .about__experience {
+    grid-template-columns: 0.6fr 1fr;
+    gap: 30px;
+  }
+
+  .about__experience > p {
+    grid-column: 2;
+  }
+
+  .about__elena {
+    gap: 45px;
+  }
+}
+
+@media (max-width: 700px) {
+  .about {
+    padding: 85px 6% 75px;
+  }
+
+  .about__header {
+    margin-bottom: 55px;
+  }
+
+  .about__heading {
+    font-size: 48px;
+  }
+
+  .about__explorer {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about__visual {
+    height: 430px;
+  }
+
+  .about__areas h3,
+  .about__elena h3 {
+    font-size: 43px;
+  }
+
+  .about__tab {
+    padding: 19px 5px;
+  }
+
+  .about__tab-title {
+    font-size: 25px;
+  }
+
+  .about__description {
+    min-height: auto;
+  }
+
+  .about__experience {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 65px 0;
+    margin-top: 75px;
+  }
+
+  .about__experience-number {
+    font-size: 100px;
+  }
+
+  .about__experience > p {
+    grid-column: auto;
+  }
+
+  .about__elena {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding-top: 75px;
+  }
+
+  .about__elena-decoration {
+    min-height: 280px;
+  }
+
+  .about__elena-decoration span {
+    font-size: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about *,
+  .about *::before,
+  .about *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

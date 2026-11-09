@@ -1,0 +1,20 @@
+.footer {
+  margin-top: 0 !important;
+  background: #0d0d0d;
+  color: #ccc;
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif; 
+}
+
+.footer a {
+  color: greenyellow;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

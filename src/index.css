@@ -1,0 +1,39 @@
+/* RESET ABSOLUTO */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  overflow-x: hidden;
+}
+
+/* El #root a veces viene con display: flex y center por defecto en Vite */
+#root {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important; /* Esto rompe el centrado forzado */
+}
+
+/* Por si acaso estás usando la etiqueta <main> en App.jsx */
+main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+:root {
+  --font-heading: "Manrope", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}

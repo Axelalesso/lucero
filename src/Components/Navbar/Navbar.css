@@ -1,0 +1,179 @@
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 25px 5.5%;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  color: #f7f5f0;
+}
+
+/* LOGO */
+
+.nav-logo a {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav-logo-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 43px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+
+.nav-logo-subtitle {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+}
+
+/* LINKS */
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-items a {
+  position: relative;
+
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+
+  transition: opacity 0.3s ease;
+}
+
+.nav-items a:hover {
+  opacity: 0.7;
+}
+
+/* REDES */
+
+.nav-social {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-social a,
+.nav-social-mobile a {
+  display: flex;
+  color: inherit;
+  font-size: 19px;
+  transition: opacity 0.3s ease;
+}
+
+.nav-social a:hover {
+  opacity: 0.65;
+}
+
+.nav-social-mobile {
+  display: none;
+}
+
+/* HAMBURGUESA */
+
+.menu-hamburguesa {
+  display: none;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .navbar {
+    padding: 22px 5%;
+  }
+
+  .nav-items {
+    gap: 17px;
+  }
+
+  .nav-items a {
+    font-size: 9px;
+  }
+
+  .nav-social {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    padding: 20px 6%;
+  }
+
+  .nav-logo-title {
+    font-size: 34px;
+  }
+
+  .nav-logo-subtitle {
+    font-size: 8px;
+  }
+
+  .menu-hamburguesa {
+    display: block;
+  }
+
+  .nav-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+    padding: 30px 6%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+
+    background: rgba(35, 34, 30, 0.97);
+    backdrop-filter: blur(12px);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    transition: 0.3s ease;
+  }
+
+  .nav-items.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-items a {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  .nav-social-mobile {
+    display: flex;
+    margin-top: 5px;
+  }
+}
